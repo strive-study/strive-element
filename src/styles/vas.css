@@ -7,10 +7,10 @@
   @each $val, $color in var(--colors) {
     --st-color-$(val): $color;
     @for $i from 3 to 9 by 2 {
-      --st-color-$(val)-light-$(i): mix(#fff, $(color), .$(i));
+      --st-color-$(val)-light-$(i): mix(#fff, $color, .$i);
     }
-    --st-color-$(val)-light-8: mix(#fff, $(color), 0.8);
-    --st-color-$(val)-dark-2: mix(#000, $(color), 0.2);
+    --st-color-$(val)-light-8: mix(#fff, $color, 0.8);
+    --st-color-$(val)-dark-2: mix(#000, $color, 0.2);
   }
 
   /* --st-color-primary: #409eff;
