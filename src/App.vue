@@ -1,14 +1,23 @@
 <template>
   <main>
-    <Button type="primary" disabled plain>你好</Button>
+    <Button type="primary" disabled plain ref="buttonRef">你好</Button>
   </main>
+  <a href="#">你好</a>
+  <h1>h1</h1>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <h4>h4</h4>
 </template>
 
 <script setup lang="ts">
 import Button from '@/components/Button/Button.vue'
+import { onMounted, ref } from 'vue'
+import type { ButtonInstance } from './components/Button/types'
+const buttonRef = ref<ButtonInstance | null>(null)
+onMounted(() => {
+  console.log(buttonRef.value!.ref)
+})
 </script>
-
-
 
 <style scoped>
 header {
