@@ -2,7 +2,22 @@
   /* 基础色 */
   --st-color-white: #ffffff;
   --st-color-black: #000000;
-  --st-color-primary: #409eff;
+  --colors: (primary: #409eff, success: #67c23a, warning: #e6a23c, danger: #f56c6c, info: #909399);
+
+  @each $val, $color in var(--colors) {
+    --st-color-$(val): $color;
+    @for $i from 3 to 9 by 2 {
+      --st-color-$(val)-light-$(i): mix(#fff, $(color), .$(i));
+    }
+    --st-color-$(val)-light-8: mix(#fff, $(color), 0.8);
+    --st-color-$(val)-dark-2: mix(#000, $(color), 0.2);
+  }
+
+  /* --st-color-primary: #409eff;
+  --st-color-success: #67c23a;
+  --st-color-warning: #e6a23c;
+  --st-color-danger: #f56c6c;
+  --st-color-info: #909399;
   --st-color-primary-light-3: #79bbff;
   --st-color-primary-light-5: #a0cfff;
   --st-color-primary-light-7: #c6e2ff;
@@ -36,7 +51,7 @@
   --st-color-info-light-7: #dedfe0;
   --st-color-info-light-8: #e9e9eb;
   --st-color-info-light-9: #f4f4f5;
-  --st-color-info-dark-2: #73767a;
+  --st-color-info-dark-2: #73767a; */
 
   /* 中性色 */
   --st-bg-color: #ffffff;
