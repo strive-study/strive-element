@@ -17,11 +17,29 @@
     <Button type="danger" plain>Danger</Button><br /><br />
     <Button size="large">Large</Button>
     <Button size="small">Small</Button>
+    <hr />
+    <Collapse>
+      <CollapseItem name="a">
+        <template #title>
+          <h1>h1 title</h1>
+        </template>
+        <h1>h1 body</h1>
+        <div>this is a content</div>
+      </CollapseItem>
+      <CollapseItem name="b" title="b">
+        <div>b test</div>
+      </CollapseItem>
+      <CollapseItem name="c" title="c" disabled>
+        <div>this is ccc</div>
+      </CollapseItem>
+    </Collapse>
   </main>
 </template>
 
 <script setup lang="ts">
 import Button from '@/components/Button/Button.vue'
+import Collapse from '@/components/Collapse/Collapse.vue'
+import CollapseItem from '@/components/Collapse/CollapseItem.vue'
 import { onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 const buttonRef = ref<ButtonInstance | null>(null)
