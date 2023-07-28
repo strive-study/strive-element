@@ -1,0 +1,124 @@
+.st-button {
+  --st-button-font-weight: var(--st-font-weight-primary);
+  --st-button-border-color: var(--st-border-color);
+  --st-button-bg-color: var(--st-fill-color-blank);
+  --st-button-text-color: var(--st-text-color-regular);
+  --st-button-disabled-text-color: var(--st-disabled-text-color);
+  --st-button-disabled-bg-color: var(--st-fill-color-blank);
+  --st-button-disabled-border-color: var(--st-border-color-light);
+  --st-button-hover-text-color: var(--st-color-primary);
+  --st-button-hover-bg-color: var(--st-color-primary-light-9);
+  --st-button-hover-border-color: var(--st-color-primary-light-7);
+  --st-button-active-text-color: var(--st-button-hover-text-color);
+  --st-button-active-border-color: var(--st-color-primary);
+  --st-button-active-bg-color: var(--st-button-hover-bg-color);
+  --st-button-outline-color: var(--st-color-primary-light-5);
+  --st-button-active-color: var(--st-text-color-primary);
+}
+.st-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--st-button-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: 0.1s;
+  font-weight: var(--st-button-font-weight);
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--st-button-bg-color);
+  border: var(--st-border);
+  border-color: var(--st-button-border-color);
+  padding: 8px 15px;
+  font-size: var(--st-font-size-base);
+  border-radius: var(--st-border-radius-base);
+  & + & {
+    margin-left: 12px;
+  }
+  &:hover,
+  &:focus {
+    color: var(--st-button-hover-text-color);
+    border-color: var(--st-button-hover-border-color);
+    background-color: var(--st-button-hover-bg-color);
+    outline: none;
+  }
+  &:active {
+    color: var(--st-button-active-text-color);
+    border-color: var(--st-button-active-border-color);
+    background-color: var(--st-button-active-bg-color);
+    outline: none;
+  }
+  &.is-plain {
+    --st-button-hover-text-color: var(--st-color-primary);
+    --st-button-hover-bg-color: var(--st-fill-color-blank);
+    --st-button-hover-border-color: var(--st-color-primary);
+  }
+  /*round*/
+  &.is-round {
+    border-radius: var(--st-border-radius-round);
+  }
+  /*circle*/
+  &.is-circle {
+    border-radius: 50%;
+    padding: 8px;
+  }
+  /*disabled*/
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus {
+    color: var(--st-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--st-button-disabled-bg-color);
+    border-color: var(--st-button-disabled-border-color);
+  }
+}
+@each $val in primary, success, warning, info, danger {
+  .st-button--$(val) {
+    --st-button-text-color: var(--st-color-white);
+    --st-button-bg-color: var(--st-color-$(val));
+    --st-button-border-color: var(--st-color-$(val));
+    --st-button-outline-color: var(--st-color-$(val)-light-5);
+    --st-button-active-color: var(--st-color-$(val)-dark-2);
+    --st-button-hover-text-color: var(--st-color-white);
+    --st-button-hover-bg-color: var(--st-color-$(val)-light-3);
+    --st-button-hover-border-color: var(--st-color-$(val)-light-3);
+    --st-button-active-bg-color: var(--st-color-$(val)-dark-2);
+    --st-button-active-border-color: var(--st-color-$(val)-dark-2);
+    --st-button-disabled-text-color: var(--st-color-white);
+    --st-button-disabled-bg-color: var(--st-color-$(val)-light-5);
+    --st-button-disabled-border-color: var(--st-color-$(val)-light-5);
+  }
+  .st-button--$(val).is-plain {
+    --st-button-text-color: var(--st-color-$(val));
+    --st-button-bg-color: var(--st-color-$(val)-light-9);
+    --st-button-border-color: var(--st-color-$(val)-light-5);
+    --st-button-hover-text-color: var(--st-color-white);
+    --st-button-hover-bg-color: var(--st-color-$(val));
+    --st-button-hover-border-color: var(--st-color-$(val));
+    --st-button-active-text-color: var(--st-color-white);
+  }
+}
+.st-button--large {
+  --st-button-size: 40px;
+  height: var(--st-button-size);
+  padding: 12px 19px;
+  font-size: var(--st-font-size-base);
+  border-radius: var(--st-border-radius-base);
+}
+.st-button--small {
+  --st-button-size: 24px;
+  height: var(--st-button-size);
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: calc(var(--st-border-radius-base) - 1px);
+}

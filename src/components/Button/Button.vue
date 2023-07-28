@@ -36,8 +36,5 @@ defineExpose({
 </script>
 
 <style scoped>
-.st-button {
-  --main-bg-color: yellow;
-  background-color: var(--main-bg-color);
-}
+
 </style>
