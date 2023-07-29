@@ -34,7 +34,7 @@
       </CollapseItem>
     </Collapse>
     <hr />
-    <Icon icon="fa-solid fa-user-secret" size="2xl" spin />
+    <Icon icon="fa-solid fa-user-secret" size="2xl" type="primary" />
   </main>
 </template>
 

@@ -1,17 +1,22 @@
 <template>
-  <i class="st-icon">
-    <font-awesome-icon v-bind="$props" />
+  <i class="st-icon" :class="{ [`st-icon-${type}`]: type }" :style="customStyles">
+    <font-awesome-icon v-bind="filteredProps" />
   </i>
 </template>
 
 <script lang="ts" setup>
-import {} from 'vue'
+import { computed } from 'vue'
+import { omit } from 'lodash-es'
 import { type FontAwesomeIconProps } from './types'
 defineOptions({
   name: 'StIcon',
   inheritAttrs: false
 })
-defineProps<FontAwesomeIconProps>()
+const props = defineProps<FontAwesomeIconProps>()
+const filteredProps = computed(() => omit(props, ['type', 'color']))
+const customStyles = computed(() => {
+  return props.color ? { color: props.color } : {}
+})
 </script>
 
 <style></style>

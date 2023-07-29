@@ -1,0 +1,16 @@
+.st-icon {
+  --st-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--st-icon-color);
+  font-size: inherit;
+}
+
+@each $val, $color in var(--colors) {
+  .st-icon-$(val) {
+    --st-icon-color: $color;
+  }
+}
