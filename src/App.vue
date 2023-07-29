@@ -18,7 +18,7 @@
     <Button size="large">Large</Button>
     <Button size="small">Small</Button>
     <hr />
-    <Collapse>
+    <Collapse v-model="openedValue" accordion>
       <CollapseItem name="a">
         <template #title>
           <h1>h1 title</h1>
@@ -33,6 +33,7 @@
         <div>this is ccc</div>
       </CollapseItem>
     </Collapse>
+    {{ openedValue }}
   </main>
 </template>
 
@@ -43,6 +44,10 @@ import CollapseItem from '@/components/Collapse/CollapseItem.vue'
 import { onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 const buttonRef = ref<ButtonInstance | null>(null)
+const openedValue = ref(['a'])
+setTimeout(() => {
+  openedValue.value = ['a', 'b']
+}, 3000)
 onMounted(() => {
   console.log(buttonRef.value!.ref)
 })

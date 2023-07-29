@@ -2,10 +2,20 @@ import type { InjectionKey, Ref } from 'vue'
 
 export type NameType = string | number
 
+export interface CollapseProp {
+  modelValue: NameType[]
+  accordion?: boolean
+}
+
 export interface CollapseItemProps {
   name: NameType
   title?: string
   disabled?: boolean
+}
+
+export interface CollapseEmits {
+  (e: 'update:modelVale', values: NameType[]): void
+  (e: 'change', values: NameType[]): void
 }
 
 export interface CollapseContext {
