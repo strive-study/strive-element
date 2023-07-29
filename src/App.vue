@@ -33,7 +33,8 @@
         <div>this is ccc</div>
       </CollapseItem>
     </Collapse>
-    {{ openedValue }}
+    <hr />
+    <Icon icon="fa-solid fa-user-secret" size="2xl" spin />
   </main>
 </template>
 
@@ -41,13 +42,12 @@
 import Button from '@/components/Button/Button.vue'
 import Collapse from '@/components/Collapse/Collapse.vue'
 import CollapseItem from '@/components/Collapse/CollapseItem.vue'
+import Icon from '@/components/Icon/Icon.vue'
 import { onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 const buttonRef = ref<ButtonInstance | null>(null)
 const openedValue = ref([])
-// setTimeout(() => {
-//   openedValue.value = ['a', 'b']
-// }, 3000)
+
 onMounted(() => {
   console.log(buttonRef.value!.ref)
 })
