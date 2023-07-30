@@ -22,13 +22,14 @@ if (props.accordion && activeNames.value.length > 1) {
 }
 const handleItemClick = (item: NameType) => {
   if (props.accordion) {
-    if (activeNames.value[0] === item) {
-      activeNames.value.pop()
-      activeNames.value.push('')
-    } else {
-      activeNames.value.pop()
-      activeNames.value.push(item)
-    }
+    activeNames.value = [activeNames.value[0] === item ? '' : item]
+    // if (activeNames.value[0] === item) {
+    //   activeNames.value.pop()
+    //   activeNames.value.push('')
+    // } else {
+    //   activeNames.value.pop()
+    //   activeNames.value.push(item)
+    // }
   } else {
     const index = activeNames.value.indexOf(item)
     if (index > -1) {

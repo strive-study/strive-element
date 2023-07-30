@@ -101,4 +101,8 @@
   --st-disabled-bg-color: var(--st-fill-color-light);
   --st-disabled-text-color: var(--st-text-color-placeholder);
   --st-disabled-border-color: var(--st-border-color-light);
+
+  /* animation */
+  --st-transition-duration: 0.3s;
+  --st-transition-duration-fast: 0.2s;
 }

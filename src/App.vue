@@ -17,6 +17,8 @@
     <Button type="danger" plain>Danger</Button><br /><br />
     <Button size="large">Large</Button>
     <Button size="small">Small</Button>
+    <Button size="large" loading>Loading</Button>
+    <Button size="large" icon="arrow-up">Icon</Button>
     <hr />
     <Collapse v-model="openedValue" accordion>
       <CollapseItem name="a">
@@ -33,6 +35,7 @@
         <div>this is ccc</div>
       </CollapseItem>
     </Collapse>
+    {{ openedValue }}
     <hr />
     <Icon icon="fa-solid fa-user-secret" size="2xl" type="primary" />
   </main>
