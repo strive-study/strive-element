@@ -1,0 +1,38 @@
+.st-alert {
+  --st-alert-font-weight: var(--st-font-weight-primary);
+  --st-alert-border-color: var(--st-border-color);
+  --st-alert-bg-color: var(--st-color-info-light-9);
+  --st-alert-text-color: var(--st-color-info);
+}
+.st-alert {
+  background-color: var(--st-alert-bg-color);
+  color: var(--st-alert-text-color);
+  margin: 12px;
+  position: relative;
+  padding: 12px 12px 12px 24px;
+  border-radius: var(--st-border-radius-base);
+  font-weight: var(--st-alert-font-weight);
+  font-size: var(--st-font-size-base);
+  line-height: 1;
+  .delete-icon {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+  }
+  .content {
+  }
+}
+
+@each $val in var(--colors) {
+  .st-alert--$(val) {
+    --st-alert-bg-color: var(--st-color-$(val)-light-9);
+    --st-alert-text-color: var(--st-color-$(val));
+    --st-alert-border-color: var(--st-color-$(val)-light-9);
+  }
+  .st-alert--$(val).is-dark {
+    --st-alert-bg-color: var(--st-color-$(val));
+    --st-alert-text-color: var(--st-color-white);
+    --st-alert-border-color: var(--st-color-$(val));
+  }
+}

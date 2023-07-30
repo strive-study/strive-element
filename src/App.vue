@@ -1,9 +1,10 @@
 <template>
   <main>
+    <h1>Button</h1>
     <Button ref="buttonRef">Test Button</Button>
     <Button plain>Plain Button</Button>
     <Button round>Round Button</Button>
-    <Button circle>Strive</Button>
+    <Button circle>Circle</Button>
     <Button disabled>Disabled Button</Button><br /><br />
     <Button type="primary">Primary</Button>
     <Button type="success">Success</Button>
@@ -20,6 +21,7 @@
     <Button size="large" loading>Loading</Button>
     <Button size="large" icon="arrow-up">Icon</Button>
     <hr />
+    <h1>Collapse</h1>
     <Collapse v-model="openedValue" accordion>
       <CollapseItem name="a">
         <template #title>
@@ -37,7 +39,16 @@
     </Collapse>
     {{ openedValue }}
     <hr />
+    <h1>Icon</h1>
     <Icon icon="fa-solid fa-user-secret" size="2xl" type="primary" />
+    <hr />
+    <h1>Alert</h1>
+    <Alert closeable content="info" @close="onClose" ref="alertRef" />
+    <Alert closeable content="success" type="success" />
+    <Alert closeable content="warning" type="warning" />
+    <Alert closeable content="danger" type="danger" />
+    <Alert closeable content="dark primary" type="primary" effect="dark" />
+    <Alert closeable content="dark danger" type="danger" effect="dark" />
   </main>
 </template>
 
@@ -46,14 +57,25 @@ import Button from '@/components/Button/Button.vue'
 import Collapse from '@/components/Collapse/Collapse.vue'
 import CollapseItem from '@/components/Collapse/CollapseItem.vue'
 import Icon from '@/components/Icon/Icon.vue'
+import Alert from '@/components/Alert/Alert.vue'
 import { onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
+import type { AlertInstance } from './components/Alert/types'
+
 const buttonRef = ref<ButtonInstance | null>(null)
+const alertRef = ref<AlertInstance | null>(null)
 const openedValue = ref([])
 
 onMounted(() => {
-  console.log(buttonRef.value!.ref)
+  setTimeout(() => {
+    if (alertRef.value) {
+      alertRef.value.close()
+    }
+  }, 3000)
 })
+const onClose = () => {
+  console.log('关闭了')
+}
 </script>
 
 <style scoped></style>
