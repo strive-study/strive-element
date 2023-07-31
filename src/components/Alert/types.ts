@@ -5,7 +5,7 @@ export interface AlertProps {
   closeable: boolean
 }
 
-export interface AlertEvent {
+export interface AlertEmits {
   (e: 'close'): void
 }
 

@@ -1,38 +1,70 @@
 .st-alert {
-  --st-alert-font-weight: var(--st-font-weight-primary);
-  --st-alert-border-color: var(--st-border-color);
-  --st-alert-bg-color: var(--st-color-info-light-9);
+  --st-alert-padding: 12px 16px;
+  --st-alert-border-radius-base: var(--st-border-radius-base);
+  --st-alert-bg-color: var(--st-color-white);
+  --st-alert-content-font-size: var(--st-font-size-base);
+  --st-alert-icon-size: 16px;
   --st-alert-text-color: var(--st-color-info);
+  --st-alert-top-margin: 20px;
 }
 .st-alert {
-  background-color: var(--st-alert-bg-color);
-  color: var(--st-alert-text-color);
-  margin: 12px;
+  padding: var(--st-alert-padding);
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: var(--st-alert-border-radius-base);
   position: relative;
-  padding: 12px 12px 12px 24px;
-  border-radius: var(--st-border-radius-base);
-  font-weight: var(--st-alert-font-weight);
-  font-size: var(--st-font-size-base);
-  line-height: 1;
-  .delete-icon {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    cursor: pointer;
+  background-color: var(--st-alert-bg-color);
+  overflow: hidden;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  transition: opacity var(--st-transition-duration);
+  margin-top: var(--st-alert-top-margin);
+  .st-alert__content {
+    color: var(--st-alert-text-color);
+    font-size: var(--st-alert-content-font-size);
+    line-height: 1;
+    vertical-align: text-top;
   }
-  .content {
+  .st-alert__close {
+    font-size: var(--el-alert-close-font-size);
+    opacity: 1;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    cursor: pointer;
+    .st-icon {
+      vertical-align: top;
+    }
+  }
+  /* default light */
+  &.st-alert--light {
+    .st-alert__close {
+      color: var(--st-alert-text-color);
+    }
+  }
+  /* default dark */
+  &.st-alert--dark {
+    .st-alert__close {
+      color: var(--st-color-white);
+    }
   }
 }
 
 @each $val in var(--colors) {
-  .st-alert--$(val) {
+  .st-alert--$(val).st-alert--light {
     --st-alert-bg-color: var(--st-color-$(val)-light-9);
     --st-alert-text-color: var(--st-color-$(val));
     --st-alert-border-color: var(--st-color-$(val)-light-9);
   }
-  .st-alert--$(val).is-dark {
+  .st-alert--$(val).st-alert--dark {
     --st-alert-bg-color: var(--st-color-$(val));
     --st-alert-text-color: var(--st-color-white);
     --st-alert-border-color: var(--st-color-$(val));
   }
+}
+
+.st-alert-fade-enter-from,
+.st-alert-fade-leave-to {
+  opacity: 0;
 }
