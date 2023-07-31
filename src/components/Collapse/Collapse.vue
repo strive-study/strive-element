@@ -21,26 +21,29 @@ if (props.accordion && activeNames.value.length > 1) {
   console.warn('手风琴特效只能激活一个元素')
 }
 const handleItemClick = (item: NameType) => {
+  let _activeNames = [...activeNames.value]
   if (props.accordion) {
-    // activeNames.value = [activeNames.value[0] === item ? '' : item]
-    if (activeNames.value[0] === item) {
-      activeNames.value.pop()
-      activeNames.value.push('')
-    } else {
-      activeNames.value.pop()
-      activeNames.value.push(item)
-    }
+    _activeNames = [activeNames.value[0] === item ? '' : item]
+    activeNames.value = _activeNames
+    // if (activeNames.value[0] === item) {
+    //   activeNames.value.pop()
+    //   activeNames.value.push('')
+    // } else {
+    //   activeNames.value.pop()
+    //   activeNames.value.push(item)
+    // }
   } else {
-    const index = activeNames.value.indexOf(item)
+    const index = _activeNames.indexOf(item)
     if (index > -1) {
-      activeNames.value.splice(index, 1)
+      _activeNames.splice(index, 1)
     } else {
-      activeNames.value.push(item)
+      _activeNames.push(item)
     }
+    activeNames.value = _activeNames
   }
 
-  emits('update:modelVale', activeNames.value)
-  emits('change', activeNames.value)
+  emits('update:modelVale', _activeNames)
+  emits('change', _activeNames)
 }
 provide(collapseContextKey, {
   activeNames,
