@@ -1,7 +1,7 @@
 <template>
   <main>
     <h1>Popper</h1>
-    <Tooltip placement="right">
+    <Tooltip placement="right" :trigger="trigger">
       <img src="./assets/logo.svg" style="width: 125px; height: 125px" alt="" />
       <template #content>
         <h1>你好嗷嗷</h1>
@@ -73,12 +73,13 @@ import type { AlertInstance } from './components/Alert/types'
 const buttonRef = ref<ButtonInstance | null>(null)
 const alertRef = ref<AlertInstance | null>(null)
 const openedValue = ref([])
-
+const trigger = ref('click')
 onMounted(() => {
   setTimeout(() => {
     if (alertRef.value) {
       alertRef.value.close()
     }
+    trigger.value = 'hover'
   }, 3000)
 })
 const onClose = () => {
