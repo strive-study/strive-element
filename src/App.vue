@@ -1,5 +1,12 @@
 <template>
   <main>
+    <h1>Popper</h1>
+    <Tooltip placement="right">
+      <img src="./assets/logo.svg" style="width: 125px; height: 125px" alt="" />
+      <template #content>
+        <h1>你好嗷嗷</h1>
+      </template>
+    </Tooltip>
     <h1>Button</h1>
     <Button ref="buttonRef">Test Button</Button>
     <Button plain>Plain Button</Button>
@@ -49,6 +56,7 @@
     <Alert closeable content="danger" type="danger" />
     <Alert closeable content="dark primary" type="primary" effect="dark" />
     <Alert closeable content="dark danger" type="danger" effect="dark" />
+    <hr />
   </main>
 </template>
 
@@ -58,10 +66,10 @@ import Collapse from '@/components/Collapse/Collapse.vue'
 import CollapseItem from '@/components/Collapse/CollapseItem.vue'
 import Icon from '@/components/Icon/Icon.vue'
 import Alert from '@/components/Alert/Alert.vue'
+import Tooltip from '@/components/Tooltip/Tooltip.vue'
 import { onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 import type { AlertInstance } from './components/Alert/types'
-
 const buttonRef = ref<ButtonInstance | null>(null)
 const alertRef = ref<AlertInstance | null>(null)
 const openedValue = ref([])
