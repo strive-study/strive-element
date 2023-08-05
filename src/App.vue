@@ -1,12 +1,20 @@
 <template>
   <main>
     <h1>Popper</h1>
-    <Tooltip placement="right" :trigger="trigger">
-      <img src="./assets/logo.svg" style="width: 125px; height: 125px" alt="" />
-      <template #content>
+    <Tooltip
+      placement="right"
+      content="你好哦哦哦"
+      :open-delay="100"
+      :close-delay="100"
+      :trigger="trigger"
+      ref="tooltipRef"
+    >
+      <img src="./assets/logo.svg" :width="125" :height="125" alt="" />
+      <!-- <template #content>
         <h1>你好嗷嗷</h1>
-      </template>
+      </template> -->
     </Tooltip>
+    <hr />
     <h1>Button</h1>
     <Button ref="buttonRef">Test Button</Button>
     <Button plain>Plain Button</Button>
@@ -70,16 +78,20 @@ import Tooltip from '@/components/Tooltip/Tooltip.vue'
 import { onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 import type { AlertInstance } from './components/Alert/types'
+import type { TooltipInstance } from './components/Tooltip/types'
 const buttonRef = ref<ButtonInstance | null>(null)
 const alertRef = ref<AlertInstance | null>(null)
+const tooltipRef = ref<TooltipInstance | null>(null)
 const openedValue = ref([])
-const trigger = ref('click')
+const trigger = ref<any>('hover')
+
 onMounted(() => {
   setTimeout(() => {
     if (alertRef.value) {
       alertRef.value.close()
     }
-    trigger.value = 'hover'
+    // tooltipRef.value?.show()
+    // trigger.value = 'hover'
   }, 3000)
 })
 const onClose = () => {
