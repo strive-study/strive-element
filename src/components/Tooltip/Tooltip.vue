@@ -64,17 +64,13 @@ const togglePopper = () => {
   }
 }
 const open = () => {
-  setTimeout(() => {
-    isOpen.value = true
-    emits('visible-change', true)
-  }, props.openDelay)
+  isOpen.value = true
+  emits('visible-change', true)
 }
 
 const close = () => {
-  setTimeout(() => {
-    isOpen.value = false
-    emits('visible-change', false)
-  }, props.closeDelay)
+  isOpen.value = false
+  emits('visible-change', false)
 }
 const openDebounce = debounce(open, props.openDelay)
 const closeDebounce = debounce(close, props.closeDelay)

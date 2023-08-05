@@ -7,6 +7,7 @@
       :open-delay="100"
       :close-delay="100"
       :trigger="trigger"
+      :manual="manual"
       ref="tooltipRef"
     >
       <img src="./assets/logo.svg" :width="125" :height="125" alt="" />
@@ -16,7 +17,7 @@
     </Tooltip>
     <hr />
     <h1>Button</h1>
-    <Button ref="buttonRef">Test Button</Button>
+    <Button ref="buttonRef" @click="manual = !manual">Test Button</Button>
     <Button plain>Plain Button</Button>
     <Button round>Round Button</Button>
     <Button circle>Circle</Button>
@@ -84,6 +85,7 @@ const alertRef = ref<AlertInstance | null>(null)
 const tooltipRef = ref<TooltipInstance | null>(null)
 const openedValue = ref([])
 const trigger = ref<any>('click')
+const manual = ref<boolean>(false)
 
 onMounted(() => {
   setTimeout(() => {
