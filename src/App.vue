@@ -83,15 +83,13 @@ const buttonRef = ref<ButtonInstance | null>(null)
 const alertRef = ref<AlertInstance | null>(null)
 const tooltipRef = ref<TooltipInstance | null>(null)
 const openedValue = ref([])
-const trigger = ref<any>('hover')
+const trigger = ref<any>('click')
 
 onMounted(() => {
   setTimeout(() => {
     if (alertRef.value) {
       alertRef.value.close()
     }
-    // tooltipRef.value?.show()
-    // trigger.value = 'hover'
   }, 3000)
 })
 const onClose = () => {

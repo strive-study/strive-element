@@ -1,6 +1,6 @@
 <template>
-  <div class="st-tooltip" v-on="events" ref="popperContainerNode">
-    <div class="st-tooltip__trigger" ref="triggerNode">
+  <div class="st-tooltip" v-on="outerEvents" ref="popperContainerNode">
+    <div class="st-tooltip__trigger" ref="triggerNode" v-on="events">
       <slot />
     </div>
     <Transition :name="transition">
@@ -26,6 +26,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   openDelay: 0,
   closeDelay: 0
 })
+let outerEvents: Record<string, any> = reactive({})
 let events: Record<string, any> = reactive({})
 const popperOptions = computed(() => {
   return {
@@ -88,7 +89,7 @@ const closeFinal = () => {
 const attachEvents = () => {
   if (props.trigger === 'hover') {
     events['mouseenter'] = openFinal
-    events['mouseleave'] = closeFinal
+    outerEvents['mouseleave'] = closeFinal
   } else if (props.trigger === 'click') {
     events['click'] = togglePopper
   }
@@ -101,6 +102,7 @@ watch(
   isManual => {
     if (isManual) {
       events = {}
+      outerEvents = {}
     } else {
       attachEvents()
     }
@@ -110,6 +112,7 @@ watch(
   () => props.trigger,
   (newTrigger, oldTrigger) => {
     if (newTrigger !== oldTrigger) {
+      outerEvents = {}
       events = {}
       attachEvents()
     }
