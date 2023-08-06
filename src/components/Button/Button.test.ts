@@ -56,7 +56,7 @@ describe('Button.vue', () => {
   test('loading', () => {
     const wrapper = mount(Button, {
       props: {
-        loading:true
+        loading: true
       },
       slots: {
         default: 'loading'

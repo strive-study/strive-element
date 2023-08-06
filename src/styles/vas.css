@@ -2,7 +2,13 @@
   /* 基础色 */
   --st-color-white: #ffffff;
   --st-color-black: #000000;
-  --colors: (primary: #409eff, success: #67c23a, warning: #e6a23c, danger: #f56c6c, info: #909399);
+  --colors: (
+    primary: #409eff,
+    success: #67c23a,
+    warning: #e6a23c,
+    danger: #f56c6c,
+    info: #909399
+  );
 
   @each $val, $color in var(--colors) {
     --st-color-$(val): $color;
@@ -80,7 +86,8 @@
   --st-border-width: 1px;
   --st-border-style: solid;
   --st-border-color-hover: var(--st-text-color-disabled);
-  --st-border: var(--st-border-width) var(--st-border-style) var(--st-border-color);
+  --st-border: var(--st-border-width) var(--st-border-style)
+    var(--st-border-color);
   --st-border-radius-base: 4px;
   --st-border-radius-small: 2px;
   --st-border-radius-round: 20px;
@@ -93,8 +100,9 @@
   --st-font-size-base: 14px;
   --st-font-size-small: 13px;
   --st-font-size-extra-small: 12px;
-  --st-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+  --st-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial,
+    sans-serif;
   --st-font-weight-primary: 500;
 
   /*disabled*/

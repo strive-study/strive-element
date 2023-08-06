@@ -82,7 +82,7 @@ describe('Collapse.vue', () => {
     expect(disableContent.isVisible()).toBeFalsy()
     expect(onChange).not.toHaveBeenCalled()
   })
-  
+
   test('accordion手风琴', async () => {
     wrapper = mount(
       () => {

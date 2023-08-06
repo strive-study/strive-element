@@ -23,4 +23,5 @@ export interface CollapseContext {
   handleItemClick: (name: NameType) => void
 }
 
-export const collapseContextKey: InjectionKey<CollapseContext> = Symbol('collapseContextKey')
+export const collapseContextKey: InjectionKey<CollapseContext> =
+  Symbol('collapseContextKey')
