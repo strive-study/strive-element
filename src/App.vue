@@ -1,11 +1,15 @@
 <template>
   <main>
     <h1>Dropdown</h1>
-    <Dropdown :trigger="trigger" placement="bottom" :menu-options="options">
+    <Dropdown
+      :trigger="trigger"
+      placement="bottom"
+      :menu-options="options"
+      @visible-change="e => log('visible change', e)"
+      @select="e => log('select', e)"
+      ref="tooltipRef"
+    >
       <img src="./assets/logo.svg" :width="125" :height="125" alt="" />
-      <!-- <template #content>
-        <h1>你好嗷嗷</h1>
-      </template> -->
     </Dropdown>
     <hr />
     <h1>Popper</h1>
@@ -16,7 +20,6 @@
       :close-delay="100"
       :trigger="trigger"
       :manual="manual"
-      ref="tooltipRef"
     >
       <img src="./assets/logo.svg" :width="125" :height="125" alt="" />
       <!-- <template #content>
@@ -25,8 +28,8 @@
     </Tooltip>
     <hr />
     <h1>Button</h1>
-    <Button ref="buttonRef" @click="manual = !manual">Test Button</Button>
-    <Button plain>Plain Button</Button>
+    <Button ref="buttonRef" @click="show">Test Button</Button>
+    <Button plain @click="hide">Plain Button</Button>
     <Button round>Round Button</Button>
     <Button circle>Circle</Button>
     <Button disabled>Disabled Button</Button><br /><br />
@@ -84,7 +87,7 @@ import CollapseItem from '@/components/Collapse/CollapseItem.vue'
 import Icon from '@/components/Icon/Icon.vue'
 import Alert from '@/components/Alert/Alert.vue'
 import Tooltip from '@/components/Tooltip/Tooltip.vue'
-import Dropdown from '@/components/Dropdown/Dropdown.vue'
+import Dropdown from '@/components/Dropdown/Dropdown'
 import { h, onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 import type { AlertInstance } from './components/Alert/types'
@@ -101,6 +104,8 @@ const options: MenuOption[] = [
   { key: 2, label: 'item2' },
   { key: 3, label: 'item3', disabled: true }
 ]
+const show = () => tooltipRef.value?.show()
+const hide = () => tooltipRef.value?.hide()
 onMounted(() => {
   setTimeout(() => {
     if (alertRef.value) {
@@ -111,6 +116,7 @@ onMounted(() => {
 const onClose = () => {
   console.log('关闭了')
 }
+const log = console.log
 </script>
 
 <style scoped></style>

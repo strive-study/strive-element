@@ -18,6 +18,7 @@
                 'is-disabled': item.disabled,
                 'is-divided': item.disabled
               }"
+              :id="`dropdown-item-${item.key}`"
             >
               <RenderVnode :vNode="item.label" />
             </li>
@@ -40,6 +41,9 @@ import type {
 import Tooltip from '../Tooltip/Tooltip.vue'
 import RenderVnode from '../Common/RenderVnode'
 import type { TooltipInstance } from '../Tooltip/types'
+defineOptions({
+  name: 'StDropdown'
+})
 const props = withDefaults(defineProps<DropdownProps>(), {
   hideAfterClick: true
 })
@@ -61,8 +65,8 @@ const itemClick = (e: MenuOption) => {
 }
 
 defineExpose<DropdownInstance>({
-  show: tooltipRef.value?.show,
-  hide: tooltipRef.value?.hide
+  show: () => tooltipRef.value?.show(),
+  hide: () => tooltipRef.value?.hide()
 })
 </script>
 
