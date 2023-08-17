@@ -1,5 +1,13 @@
 <template>
   <main>
+    <h1>Dropdown</h1>
+    <Dropdown :trigger="trigger" placement="bottom" :menu-options="options">
+      <img src="./assets/logo.svg" :width="125" :height="125" alt="" />
+      <!-- <template #content>
+        <h1>你好嗷嗷</h1>
+      </template> -->
+    </Dropdown>
+    <hr />
     <h1>Popper</h1>
     <Tooltip
       placement="right"
@@ -76,17 +84,23 @@ import CollapseItem from '@/components/Collapse/CollapseItem.vue'
 import Icon from '@/components/Icon/Icon.vue'
 import Alert from '@/components/Alert/Alert.vue'
 import Tooltip from '@/components/Tooltip/Tooltip.vue'
-import { onMounted, ref } from 'vue'
+import Dropdown from '@/components/Dropdown/Dropdown.vue'
+import { h, onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 import type { AlertInstance } from './components/Alert/types'
 import type { TooltipInstance } from './components/Tooltip/types'
+import type { MenuOption } from './components/Dropdown/types'
 const buttonRef = ref<ButtonInstance | null>(null)
 const alertRef = ref<AlertInstance | null>(null)
 const tooltipRef = ref<TooltipInstance | null>(null)
 const openedValue = ref([])
 const trigger = ref<any>('click')
 const manual = ref<boolean>(false)
-
+const options: MenuOption[] = [
+  { key: 1, label: h('b', 'this is bold') },
+  { key: 2, label: 'item2' },
+  { key: 3, label: 'item3', disabled: true }
+]
 onMounted(() => {
   setTimeout(() => {
     if (alertRef.value) {
