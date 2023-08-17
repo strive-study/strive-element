@@ -71,7 +71,7 @@ export default defineComponent({
               class={{
                 'st-dropdown__item': true,
                 'is-disabled': item.disabled,
-                'is-divided': item.disabled
+                'is-divided': item.divided
               }}
               id={`dropdown-item-${item.key}`}
               onClick={() => itemClick(item)}
