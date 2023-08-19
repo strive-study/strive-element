@@ -13,6 +13,7 @@
 import { computed } from 'vue'
 import { omit } from 'lodash-es'
 import { type FontAwesomeIconProps } from './types'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 defineOptions({
   name: 'StIcon',
   inheritAttrs: false
