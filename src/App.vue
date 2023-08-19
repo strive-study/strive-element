@@ -108,7 +108,7 @@ const options: MenuOption[] = [
 const show = () => tooltipRef.value?.show()
 const hide = () => tooltipRef.value?.hide()
 onMounted(() => {
-  const instance = createMessage({
+  createMessage({
     message: 'hello1',
     duration: 3000,
     showClose: false

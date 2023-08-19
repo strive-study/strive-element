@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Icon from '../Icon/Icon.vue'
 import type { MessageProps } from './types'
 import RenderNode from '../Common/RenderVnode'
@@ -65,8 +65,6 @@ function clearTimer() {
 onMounted(async () => {
   visible.value = true
   startTimer()
-  // await nextTick()
-  // height.value = messageRef.value!.getBoundingClientRect().height
 })
 function keydownHandler(e: Event) {
   const event = e as KeyboardEvent
@@ -75,11 +73,7 @@ function keydownHandler(e: Event) {
   }
 }
 useEventListener(document, 'keydown', keydownHandler)
-// watch(visible, newVal => {
-//   if (!newVal) {
-//     props.onDestroy()
-//   }
-// })
+
 function destroyComponent() {
   props.onDestroy()
 }

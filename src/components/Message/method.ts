@@ -53,3 +53,7 @@ export const getLastBottomOffset = (id: string) => {
   const prev = instances[idx - 1]
   return prev.vm.exposed!.bottomOffset.value
 }
+
+export const closeAll = () => {
+  instances.forEach(instance => instance.destroy())
+}
