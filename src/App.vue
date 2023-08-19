@@ -88,6 +88,7 @@ import Icon from '@/components/Icon/Icon.vue'
 import Alert from '@/components/Alert/Alert.vue'
 import Tooltip from '@/components/Tooltip/Tooltip.vue'
 import Dropdown from '@/components/Dropdown/Dropdown'
+import { createMessage } from './components/Message/method'
 import { h, onMounted, ref } from 'vue'
 import type { ButtonInstance } from './components/Button/types'
 import type { AlertInstance } from './components/Alert/types'
@@ -107,6 +108,13 @@ const options: MenuOption[] = [
 const show = () => tooltipRef.value?.show()
 const hide = () => tooltipRef.value?.hide()
 onMounted(() => {
+  const instance = createMessage({
+    message: 'hello1',
+    duration: 3000,
+    showClose: false
+  })
+  createMessage({ message: 'hello2', duration: 0, showClose: true })
+  createMessage({ message: 'hello3', duration: 0, showClose: true })
   setTimeout(() => {
     if (alertRef.value) {
       alertRef.value.close()
