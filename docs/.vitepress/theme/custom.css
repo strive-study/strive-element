@@ -1,0 +1,26 @@
+:root {
+  /* vitepress theme */
+  --vp-c-brand: var(--st-color-primary);
+  --vp-c-brand-1: var(--st-color-primary);
+  --vp-c-brand-2: var(--st-color-primary-light-3);
+  --vp-c-brand-3: var(--st-color-primary-light-5);
+  --vp-c-brand-soft: var(--st-color-primary-light-7);
+  --vp-button-brand-bg: var(--st-color-primary);
+
+  /* demo preview color */
+  --component-preview-bg: var(--vp-code-block-bg);
+  --component-preview-soft: var(--vp-code-block-bg-light);
+}
+
+body {
+  color: var(--vp-c-text-1);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: var(--vp-c-text-1);
+}
