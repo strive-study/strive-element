@@ -1,5 +1,5 @@
 ---
-title: Button | ST-Element
+title: Button | ST-Element | Mini-Element
 description: Button组件文档
 ---
 
