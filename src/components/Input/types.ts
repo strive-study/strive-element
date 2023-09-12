@@ -1,10 +1,15 @@
 export interface InputProps {
   type: string
+  modelValue: string
   size?: 'large' | 'small'
   disabled?: boolean
   clearable?: boolean
   showPassword?: boolean
-  modelValue: string
+  placeholder?: string
+  readonly?: boolean
+  autocomplete?: string
+  autofocus?: boolean
+  form?: string
 }
 
 export interface InputEmits {

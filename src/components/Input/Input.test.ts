@@ -40,11 +40,11 @@ describe('Input', () => {
     expect(wrapper2.find('textarea').exists()).toBeTruthy()
   })
 
-  it.only('支持 v-model', async () => {
+  it('支持 v-model', async () => {
     const wrapper = mount(Input, {
       props: {
         modelValue: 'test',
-        onUpdateModelValue: async (e: any) =>
+        'onUpdate:modelValue': async (e: any) =>
           await wrapper.setProps({ modelValue: e })
       }
     })
@@ -114,6 +114,7 @@ describe('Input', () => {
     expect(input.element.type).toBe('password')
     await input.setValue('123')
     const eyeIcon = wrapper.find('.st-input__password')
+    console.log('----------', eyeIcon.html())
     expect(eyeIcon.exists()).toBeTruthy()
     expect(eyeIcon.attributes('icon')).toBe('eye-slash')
     await eyeIcon.trigger('click')

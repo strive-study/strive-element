@@ -24,8 +24,15 @@
           <slot name="prefix" />
         </span>
         <input
+          ref="inputRef"
           :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
+          v-bind="attrs"
           :disabled="disabled"
+          :readonly="readonly"
+          :autocomplete="autocomplete"
+          :placeholder="placeholder"
+          :autofocus="autofocus"
+          :form="form"
           class="st-input__inner"
           v-model="innerValue"
           @input="handleInput"
@@ -68,7 +75,14 @@
     <template v-else>
       <textarea
         class="st-textarea__wrapper"
+        inputRef
+        v-bind="attrs"
         :disabled="disabled"
+        :readonly="readonly"
+        :autocomplete="autocomplete"
+        :placeholder="placeholder"
+        :autofocus="autofocus"
+        :form="form"
         v-model="innerValue"
         @input="handleInput"
         @blur="handleBlur"
@@ -80,19 +94,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, useAttrs, type Ref } from 'vue'
 import type { InputEmits, InputProps } from './types'
 import Icon from '../Icon/Icon.vue'
 defineOptions({
-  name: 'StInput'
+  name: 'StInput',
+  inheritAttrs: false
 })
 const props = withDefaults(defineProps<InputProps>(), {
-  type: 'text'
+  type: 'text',
+  autocomplete: 'off'
 })
 const emits = defineEmits<InputEmits>()
+const attrs = useAttrs()
 const innerValue = ref(props.modelValue)
 const isFocus = ref(false)
 const passwordVisible = ref(false)
+const inputRef = ref() as Ref<HTMLInputElement>
 const showClear = computed(
   () =>
     props.clearable && !props.disabled && !!innerValue.value && isFocus.value
@@ -137,6 +155,9 @@ watch(
     innerValue.value = val
   }
 )
+defineExpose({
+  ref: inputRef
+})
 </script>
 
 <style></style>
