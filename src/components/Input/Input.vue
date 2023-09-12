@@ -40,9 +40,10 @@
           @focus="handleFocus"
           @change="handleChange"
         />
-        <!-- prefix suffix -->
+        <!-- suffix slot -->
         <span
           v-if="$slots.suffix || showClear || showPasswordArea"
+          @click="keepFocus"
           class="st-input__suffix"
         >
           <slot name="suffix" />
@@ -50,6 +51,7 @@
             icon="circle-xmark"
             v-if="showClear"
             @click="clear"
+            @mousedown.prevent="NOOP"
             class="st-input__clear"
           />
           <Icon
@@ -94,7 +96,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch, computed, useAttrs, type Ref } from 'vue'
+import { ref, watch, computed, useAttrs, type Ref, nextTick } from 'vue'
 import type { InputEmits, InputProps } from './types'
 import Icon from '../Icon/Icon.vue'
 defineOptions({
@@ -118,8 +120,14 @@ const showClear = computed(
 const showPasswordArea = computed(
   () => props.showPassword && !props.disabled && !!innerValue.value
 )
+
 const togglePasswordVisible = () => {
   passwordVisible.value = !passwordVisible.value
+}
+
+const keepFocus = async () => {
+  await nextTick()
+  inputRef.value.focus()
 }
 
 const handleInput = () => {
@@ -155,6 +163,9 @@ watch(
     innerValue.value = val
   }
 )
+
+const NOOP = () => {}
+
 defineExpose({
   ref: inputRef
 })
