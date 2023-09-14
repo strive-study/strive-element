@@ -7,8 +7,8 @@ import {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'My Awesome Project',
-  description: 'A VitePress Site',
+  title: 'St-Element | Mini Element',
+  description: 'Mini Element组件库',
   vite: {
     resolve: {
       alias: {
@@ -25,20 +25,19 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Github', link: 'https://github.com/strive-study/strive-element' },
+      { text: '个人主页', link: 'https://github.com/18845778092' }
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: '基础',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: '快速开始', link: '/quick-start' },
         ]
       },
       {
-        text: 'Basic',
+        text: '组件',
         items: [
           { text: 'Button', link: '/components/button' },
           { text: 'Input', link: '/components/input' },
@@ -48,7 +47,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/strive-study/strive-element' }
     ]
   }
 })
