@@ -15,9 +15,9 @@
     :type="nativeType"
     ref="_ref"
   >
-    <Icon icon="spinner" spin v-if="loading"></Icon>
-    <Icon :icon="icon" v-if="icon"></Icon>
-    <span ref="textRef" v-if="textVisible">
+    <Icon icon="spinner" spin v-if="loading" />
+    <Icon :icon="icon" v-if="icon" />
+    <span :style="textStyle" ref="textRef">
       <slot></slot>
     </span>
   </button>
@@ -38,7 +38,14 @@ defineOptions({
 
 const _ref = ref<HTMLButtonElement>()
 const textRef = ref<HTMLElement>()
-const textVisible = computed(()=> textRef.value?.textContent )
+const textStyle = computed(() => {
+  if (!textRef.value?.textContent) {
+    return {
+      marginLeft: '0'
+    }
+  }
+  return {}
+})
 defineExpose({
   ref: _ref
 })

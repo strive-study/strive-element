@@ -82,7 +82,7 @@
     border-color: var(--st-button-disabled-border-color);
   }
   [class*='st-icon'] + span {
-    margin-left: 6px;
+    margin-left: 8px;
   }
 }
 @each $val in primary, success, warning, info, danger {
