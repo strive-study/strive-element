@@ -1,0 +1,54 @@
+.st-select {
+  --st-select-item-hover-bg-color: var(--st-fill-color-light);
+  --st-select-item-font-size: var(--st-font-size-base);
+  --st-select-item-font-color: var(--st-text-color-regular);
+  --st-select-item-selected-font-color: var(--st-color-primary);
+  --st-select-item-disabled-font-color: var(--st-text-color-placeholder);
+  --st-select-input-focus-border-color: var(--st-color-primary);
+}
+
+.st-select {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 32px;
+  .st-tooltip .st-tooltip__popper {
+    padding: 0;
+  }
+  .st-input__inner {
+    cursor: pointer;
+  }
+  .st-select__menu {
+    list-style: none;
+    margin: 6px 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .st-select__menu-item {
+    margin: 0;
+    font-size: var(--st-select-item-font-size);
+    padding: 0 32px 0 20px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--st-select-item-font-color);
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--st-select-item-hover-bg-color);
+    }
+    &.is-selected {
+      color: var(--st-select-item-selected-font-color);
+      font-weight: 700;
+    }
+    &.is-disabled {
+      color: var(--st-select-item-disabled-font-color);
+      cursor: not-allowed;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+}
