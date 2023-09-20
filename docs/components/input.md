@@ -47,3 +47,37 @@ description: Input 组件的文档
 使用 **clearable** 属性即可得到一个可一键清空的输入框
 
 <preview path="../demo/Input/Clear.vue" title="清空文本框" description="Input 清空文本框"></preview>
+
+### Input Attributes
+
+| Name         | Description                                         | Type                         | Default |
+| ------------ | --------------------------------------------------- | ---------------------------- | ------- |
+| size         | input大小                                           | `enum` - `'large'\| 'small'` | —       |
+| v-model      | 绑定值                                              | `string \| number`           | -       |
+| clearable    | 是否显示清除按钮，只有当 `type` 不是 textarea时生效 | `boolean`                    | false   |
+| showPassword | 是否显示切换密码图标                                | `boolean`                    | false   |
+| disabled     | 原生 `disabled` 属性                                | `boolean`                    | false   |
+| readonly     | 原生 `readonly` 属性，是否只读                      | `boolean`                    | false   |
+| type         | 原生 `input` 属性                                   | `string`                     | —       |
+| autocomplete | 原生 `autocomplete` 属性                            | `boolean`                    | false   |
+| autofocus    | 原生 `autofocus` 属性                               | `boolean`                    | false   |
+| form         | 原生 `form` 属性                                    | `string`                     | -       |
+
+### Input Events
+
+| Name   | Description                                      | 参数类型     |
+| ------ | ------------------------------------------------ | ------------ |
+| input  | 在 Input 值改变时触发                            | `string`     |
+| change | 仅当 `modelValue` 改变时，当输入框失去焦点时触发 | `string`     |
+| focus  | 当选择器的输入框获得焦点时触发                   | `FocusEvent` |
+| blur   | 当选择器的输入框失去焦点时触发                   | `FocusEvent` |
+| clear  | 在点击由 `clearable` 属性生成的清空按钮时触发    | `undefined`  |
+
+### Input Slots
+
+| Name    | Description                                   |
+| ------- | --------------------------------------------- |
+| prefix  | 输入框头部内容，只对非 `type="textarea"` 有效 |
+| suffix  | 输入框尾部内容，只对非 `type="textarea"` 有效 |
+| prepend | 输入框前置内容，只对非 `type="textarea"` 有效 |
+| append  | 输入框后置内容，只对非 `type="textarea"` 有效 |

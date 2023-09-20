@@ -3,16 +3,16 @@
 layout: home
 
 hero:
-  name: "My Awesome Project"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  name: "St Element"
+  text: "Element风格的组件库"
+  tagline: ""
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 快速开始
+      link: /quick-start
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 组件列表 
+      link: /components/button
 
 features:
   - title: Feature A
