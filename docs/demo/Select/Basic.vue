@@ -5,13 +5,14 @@
     clearable
     placeholder="选择器, 请选择"
     :renderLabel="customRender"
+    filterable
   />
 </template>
 
 <script setup>
 import { ref, h } from 'vue'
 import Select from '@/components/Select/Select.vue'
-const test = ref(1)
+const test = ref()
 const options = [
   { label: '选项1', value: 1 },
   { label: '选项2', value: 2 },

@@ -6,6 +6,10 @@ export interface SelectOption {
   disabled?: boolean
 }
 
+// 自定义渲染option
+export type RenderLabelFunc = (option: SelectOption) => VNode
+// 自定义过滤
+export type CustomFilterFunc = (value: string) => SelectOption[]
 export interface SelectProps {
   modelValue: string
   options: SelectOption[]
@@ -13,6 +17,8 @@ export interface SelectProps {
   disabled: boolean
   clearable?: boolean
   renderLabel?: RenderLabelFunc
+  filterable?: boolean
+  filterMethod?: CustomFilterFunc
 }
 
 export interface SelectStates {
@@ -20,8 +26,6 @@ export interface SelectStates {
   selectedOption: null | SelectOption
   mouseHover: boolean
 }
-
-export type RenderLabelFunc = (option: SelectOption) => VNode
 
 export interface SelectEmits {
   (e: 'change', value: string): void

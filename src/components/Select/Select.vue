@@ -17,10 +17,11 @@
     >
       <Input
         v-model="states.inputValue"
-        :placeholder="placeholder"
+        :placeholder="filteredPlaceholder"
         :disabled="disabled"
+        :readonly="!filterable || !isDropdownShow"
+        @input="onFilter"
         ref="inputRef"
-        readonly
       >
         <template #suffix>
           <Icon
@@ -40,7 +41,7 @@
       </Input>
       <template #content>
         <ul class="st-select__menu">
-          <template v-for="(item, index) in options" :key="index">
+          <template v-for="(item, index) in filteredOptions" :key="index">
             <li
               class="st-select__menu-item"
               :class="{
@@ -61,7 +62,8 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref, reactive, computed } from 'vue'
+import { type Ref, ref, reactive, computed, watch } from 'vue'
+import { isFunction } from 'lodash-es'
 import type {
   SelectProps,
   SelectEmits,
@@ -112,6 +114,30 @@ const popperOptions: any = {
     }
   ]
 }
+const filteredOptions = ref(props.options)
+watch(
+  () => props.options,
+  newOptions => {
+    filteredOptions.value = newOptions
+  }
+)
+// 可过滤
+const generateFilterOptions = (searchValue: string) => {
+  if (!props.filterable) return
+  // 自定义过滤逻辑
+  if (props.filterMethod && isFunction(props.filterMethod)) {
+    filteredOptions.value = props.filterMethod(searchValue)
+  } else {
+    filteredOptions.value = props.options.filter(option =>
+      option.label.includes(searchValue)
+    )
+  }
+}
+
+const onFilter = () => {
+  generateFilterOptions(states.inputValue)
+}
+
 const showClearIcon = computed(() => {
   return (
     props.clearable &&
@@ -127,11 +153,29 @@ const onClear = () => {
   emits('change', '')
   emits('update:modelValue', '')
 }
+const filteredPlaceholder = computed(() => {
+  return props.filterable && states.selectedOption && isDropdownShow.value
+    ? states.selectedOption.label
+    : props.placeholder
+})
 const controlDropdown = (show: boolean) => {
   if (show) {
+    // filter模式 && 已经选择过某个值, 再次点击清空值
+    if (props.filterable && states.selectedOption) {
+      states.inputValue = ''
+    }
+    if (props.filterable) {
+      generateFilterOptions(states.inputValue)
+    }
     tooltipRef.value.show()
   } else {
     tooltipRef.value.hide()
+    // blur 值回灌
+    if (props.filterable) {
+      states.inputValue = states.selectedOption
+        ? states.selectedOption.label
+        : ''
+    }
   }
   isDropdownShow.value = show
   emits('visible-change', show)
