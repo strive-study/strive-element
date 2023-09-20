@@ -14,6 +14,18 @@
   .st-tooltip .st-tooltip__popper {
     padding: 0;
   }
+  .st-input.is-focus .st-input__wrapper {
+    box-shadow: 0 0 0 1px var(--st-select-input-focus-border-color) inset !important;
+  }
+  /* 右侧箭头 */
+  .st-input {
+    .header-angle {
+      transition: transform var(--st-transition-duration);
+      &.is-active {
+        transform: rotate(-180deg);
+      }
+    }
+  }
   .st-input__inner {
     cursor: pointer;
   }

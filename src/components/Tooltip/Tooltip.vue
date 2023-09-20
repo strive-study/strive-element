@@ -55,6 +55,9 @@ useClickOutSide(popperContainerNode, () => {
   if (props.trigger === 'click' && isOpen.value && !props.manual) {
     closeFinal()
   }
+  if (isOpen.value) {
+    emits('click-outside', true)
+  }
 })
 onUnmounted(() => {
   popperInstance?.destroy()

@@ -11,13 +11,23 @@
       manual
       ref="tooltipRef"
       :popper-options="popperOptions"
+      @click-outside="controlDropdown(false)"
     >
       <Input
         v-model="states.inputValue"
         :placeholder="placeholder"
         :disabled="disabled"
+        ref="inputRef"
         readonly
-      />
+      >
+        <template #suffix>
+          <Icon
+            icon="angle-down"
+            class="header-angle"
+            :class="{ 'is-active': isDropdownShow }"
+          />
+        </template>
+      </Input>
       <template #content>
         <ul class="st-select__menu">
           <template v-for="(item, index) in options" :key="index">
@@ -48,8 +58,10 @@ import type {
   SelectStates
 } from './types'
 import type { TooltipInstance } from '../Tooltip/types'
+import type { InputInstance } from '../Input/types'
 import Tooltip from '../Tooltip/Tooltip.vue'
 import Input from '../Input/Input.vue'
+import Icon from '../Icon/Icon.vue'
 const findOption = (value: string) => {
   const option = props.options.find(option => option.value === value)
   return option ? option : null
@@ -61,6 +73,7 @@ const props = defineProps<SelectProps>()
 const emits = defineEmits<SelectEmits>()
 const tooltipRef = ref() as Ref<TooltipInstance>
 const isDropdownShow = ref(false)
+const inputRef = ref() as Ref<InputInstance>
 const initialOption = findOption(props.modelValue)
 const states = reactive<SelectStates>({
   inputValue: initialOption ? initialOption.label : '',
@@ -111,6 +124,7 @@ const itemSelect = (e: SelectOption) => {
   emits('change', e.value)
   emits('update:modelValue', e.value)
   controlDropdown(false)
+  inputRef.value.ref.focus()
 }
 </script>
 
