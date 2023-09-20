@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+
 export interface SelectOption {
   label: string
   value: string
@@ -10,6 +12,7 @@ export interface SelectProps {
   placeholder: string
   disabled: boolean
   clearable?: boolean
+  renderLabel?: RenderLabelFunc
 }
 
 export interface SelectStates {
@@ -17,6 +20,8 @@ export interface SelectStates {
   selectedOption: null | SelectOption
   mouseHover: boolean
 }
+
+export type RenderLabelFunc = (option: SelectOption) => VNode
 
 export interface SelectEmits {
   (e: 'change', value: string): void

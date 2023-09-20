@@ -50,12 +50,13 @@
               :id="`select-item-${item.value}`"
               @click.stop="itemSelect(item)"
             >
-              {{ item.label }}
+              <RenderVNode
+                :v-node="renderLabel ? renderLabel(item) : item.label"
+              />
             </li>
           </template>
-        </ul>
-      </template></Tooltip
-    >
+        </ul> </template
+    ></Tooltip>
   </div>
 </template>
 
@@ -72,6 +73,8 @@ import type { InputInstance } from '../Input/types'
 import Tooltip from '../Tooltip/Tooltip.vue'
 import Input from '../Input/Input.vue'
 import Icon from '../Icon/Icon.vue'
+import RenderVNode from '../Common/RenderVnode'
+
 const findOption = (value: string) => {
   const option = props.options.find(option => option.value === value)
   return option ? option : null
