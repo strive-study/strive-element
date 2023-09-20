@@ -1,5 +1,10 @@
 <template>
-  <Select v-model="test" :options="options" placeholder="选择器, 请选择" />
+  <Select
+    v-model="test"
+    :options="options"
+    clearable
+    placeholder="选择器, 请选择"
+  />
 </template>
 
 <script setup>

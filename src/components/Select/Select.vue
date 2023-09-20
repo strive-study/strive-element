@@ -5,6 +5,8 @@
       'is-disabled': disabled
     }"
     @click="toggleDropdown"
+    @mouseenter="states.mouseHover = true"
+    @mouseleave="states.mouseHover = false"
   >
     <Tooltip
       placement="bottom-start"
@@ -22,6 +24,14 @@
       >
         <template #suffix>
           <Icon
+            v-if="showClearIcon"
+            icon="circle-xmark"
+            class="st-input__clear"
+            @mousedown.prevent="NOOP"
+            @click.stop="onClear"
+          />
+          <Icon
+            v-else
             icon="angle-down"
             class="header-angle"
             :class="{ 'is-active': isDropdownShow }"
@@ -50,7 +60,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref, reactive } from 'vue'
+import { Ref, ref, reactive, computed } from 'vue'
 import type {
   SelectProps,
   SelectEmits,
@@ -77,7 +87,8 @@ const inputRef = ref() as Ref<InputInstance>
 const initialOption = findOption(props.modelValue)
 const states = reactive<SelectStates>({
   inputValue: initialOption ? initialOption.label : '',
-  selectedOption: initialOption
+  selectedOption: initialOption,
+  mouseHover: false
 })
 const popperOptions: any = {
   modifiers: [
@@ -97,6 +108,21 @@ const popperOptions: any = {
       requires: ['computeStyles']
     }
   ]
+}
+const showClearIcon = computed(() => {
+  return (
+    props.clearable &&
+    states.mouseHover &&
+    states.inputValue.trim() &&
+    states.selectedOption
+  )
+})
+const onClear = () => {
+  states.selectedOption = null
+  states.inputValue = ''
+  emits('clear')
+  emits('change', '')
+  emits('update:modelValue', '')
 }
 const controlDropdown = (show: boolean) => {
   if (show) {
@@ -126,6 +152,8 @@ const itemSelect = (e: SelectOption) => {
   controlDropdown(false)
   inputRef.value.ref.focus()
 }
+
+const NOOP = () => {}
 </script>
 
 <style></style>
