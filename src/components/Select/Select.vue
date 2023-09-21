@@ -21,6 +21,7 @@
         :disabled="disabled"
         :readonly="!filterable || !isDropdownShow"
         @input="debounceOnFilter"
+        @keydown="handleKeydown"
         ref="inputRef"
       >
         <template #suffix>
@@ -55,7 +56,8 @@
               class="st-select__menu-item"
               :class="{
                 'is-disabled': item.disabled,
-                'is-selected': states.selectedOption?.value === item.value
+                'is-selected': states.selectedOption?.value === item.value,
+                'is-highlighted': states.highlightIndex === index
               }"
               :id="`select-item-${item.value}`"
               @click.stop="itemSelect(item)"
@@ -106,7 +108,8 @@ const states = reactive<SelectStates>({
   inputValue: initialOption ? initialOption.label : '',
   selectedOption: initialOption,
   mouseHover: false,
-  loading: false
+  loading: false,
+  highlightIndex: -1
 })
 const popperOptions: any = {
   modifiers: [
@@ -160,6 +163,7 @@ const generateFilterOptions = async (searchValue: string) => {
       option.label.includes(searchValue)
     )
   }
+  states.highlightIndex = -1
 }
 const debounceOnFilter = debounce(() => {
   onFilter()
@@ -167,7 +171,52 @@ const debounceOnFilter = debounce(() => {
 const onFilter = () => {
   generateFilterOptions(states.inputValue)
 }
-
+const handleKeydown = (e: KeyboardEvent) => {
+  switch (e.key) {
+    case 'Enter':
+      if (!isDropdownShow.value) {
+        controlDropdown(true)
+      } else {
+        if (
+          states.highlightIndex > -1 &&
+          filteredOptions.value[states.highlightIndex]
+        ) {
+          itemSelect(filteredOptions.value[states.highlightIndex])
+        } else {
+          controlDropdown(false)
+        }
+      }
+      break
+    case 'Escape':
+      if (isDropdownShow.value) {
+        controlDropdown(false)
+      }
+      break
+    case 'ArrowUp':
+      e.preventDefault()
+      if (filteredOptions.value.length) {
+        if (states.highlightIndex === -1 || states.highlightIndex === 0) {
+          states.highlightIndex = filteredOptions.value.length - 1
+        } else {
+          states.highlightIndex--
+        }
+      }
+      break
+    case 'ArrowDown':
+      e.preventDefault()
+      if (filteredOptions.value.length) {
+        if (
+          states.highlightIndex === -1 ||
+          states.highlightIndex === filteredOptions.value.length - 1
+        ) {
+          states.highlightIndex = 0
+        } else {
+          states.highlightIndex++
+        }
+      }
+      break
+  }
+}
 const showClearIcon = computed(() => {
   return (
     props.clearable &&
@@ -206,6 +255,7 @@ const controlDropdown = (show: boolean) => {
         ? states.selectedOption.label
         : ''
     }
+    states.highlightIndex = -1
   }
   isDropdownShow.value = show
   emits('visible-change', show)
