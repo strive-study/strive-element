@@ -29,6 +29,15 @@
   .st-input__inner {
     cursor: pointer;
   }
+  .st-select__nodata,
+  .st-select__loading {
+    padding: 10px 0;
+    margin: 0;
+    text-align: center;
+    color: var(--st-text-color-secondary);
+    font-size: var(--st-select-font-size);
+  }
+
   .st-select__menu {
     list-style: none;
     margin: 6px 0;

@@ -10,21 +10,25 @@ export interface SelectOption {
 export type RenderLabelFunc = (option: SelectOption) => VNode
 // 自定义过滤
 export type CustomFilterFunc = (value: string) => SelectOption[]
+export type CustomFilterRemoteFunc = (value: string) => SelectOption[]
 export interface SelectProps {
   modelValue: string
-  options: SelectOption[]
+  options?: SelectOption[]
   placeholder: string
-  disabled: boolean
+  disabled?: boolean
   clearable?: boolean
   renderLabel?: RenderLabelFunc
   filterable?: boolean
   filterMethod?: CustomFilterFunc
+  remote?: boolean
+  remoteMethod?: CustomFilterRemoteFunc
 }
 
 export interface SelectStates {
   inputValue: string
   selectedOption: null | SelectOption
   mouseHover: boolean
+  loading: boolean
 }
 
 export interface SelectEmits {

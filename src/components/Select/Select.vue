@@ -20,7 +20,7 @@
         :placeholder="filteredPlaceholder"
         :disabled="disabled"
         :readonly="!filterable || !isDropdownShow"
-        @input="onFilter"
+        @input="debounceOnFilter"
         ref="inputRef"
       >
         <template #suffix>
@@ -40,7 +40,16 @@
         </template>
       </Input>
       <template #content>
-        <ul class="st-select__menu">
+        <div class="st-select__loading" v-if="states.loading">
+          <Icon icon="spinner" spin />
+        </div>
+        <div
+          class="st-select__nodata"
+          v-else-if="filterable && filteredOptions.length === 0"
+        >
+          没有数据哦
+        </div>
+        <ul class="st-select__menu" v-else>
           <template v-for="(item, index) in filteredOptions" :key="index">
             <li
               class="st-select__menu-item"
@@ -63,7 +72,7 @@
 
 <script lang="ts" setup>
 import { type Ref, ref, reactive, computed, watch } from 'vue'
-import { isFunction } from 'lodash-es'
+import { isFunction, debounce } from 'lodash-es'
 import type {
   SelectProps,
   SelectEmits,
@@ -84,7 +93,10 @@ const findOption = (value: string) => {
 defineOptions({
   name: 'StSelect'
 })
-const props = defineProps<SelectProps>()
+const props = withDefaults(defineProps<SelectProps>(), {
+  options: () => []
+})
+const timeout = computed(() => (props.remote ? 300 : 0))
 const emits = defineEmits<SelectEmits>()
 const tooltipRef = ref() as Ref<TooltipInstance>
 const isDropdownShow = ref(false)
@@ -93,7 +105,8 @@ const initialOption = findOption(props.modelValue)
 const states = reactive<SelectStates>({
   inputValue: initialOption ? initialOption.label : '',
   selectedOption: initialOption,
-  mouseHover: false
+  mouseHover: false,
+  loading: false
 })
 const popperOptions: any = {
   modifiers: [
@@ -122,18 +135,35 @@ watch(
   }
 )
 // 可过滤
-const generateFilterOptions = (searchValue: string) => {
+const generateFilterOptions = async (searchValue: string) => {
   if (!props.filterable) return
   // 自定义过滤逻辑
   if (props.filterMethod && isFunction(props.filterMethod)) {
     filteredOptions.value = props.filterMethod(searchValue)
+  } else if (
+    props.remote &&
+    props.remoteMethod &&
+    isFunction(props.remoteMethod)
+  ) {
+    // remote过滤
+    states.loading = true
+    try {
+      filteredOptions.value = await props.remoteMethod(searchValue)
+    } catch (error) {
+      console.error(error)
+      filteredOptions.value = []
+    } finally {
+      states.loading = false
+    }
   } else {
     filteredOptions.value = props.options.filter(option =>
       option.label.includes(searchValue)
     )
   }
 }
-
+const debounceOnFilter = debounce(() => {
+  onFilter()
+}, timeout.value)
 const onFilter = () => {
   generateFilterOptions(states.inputValue)
 }
