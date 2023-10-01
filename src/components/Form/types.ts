@@ -19,7 +19,10 @@ export interface FormProps {
   rules: FormRules
 }
 
-export interface FormContext extends FormProps {}
+export interface FormContext extends FormProps {
+  addField: (field: FormItemContext) => void
+  removeField: (field: FormItemContext) => void
+}
 
 export interface FormValidateFailure {
   errors: ValidateError[] | null
@@ -28,9 +31,14 @@ export interface FormValidateFailure {
 
 export interface FormItemContext {
   validate: (trigger?: string) => any
+  prop: string
 }
 
 export const formContextKey: InjectionKey<FormContext> =
   Symbol('formContextKey')
 export const formItemContextKey: InjectionKey<FormItemContext> =
   Symbol('formItemContextKey')
+
+export interface FormInstance {
+  validate: () => Promise<any>
+}

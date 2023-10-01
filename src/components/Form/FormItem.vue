@@ -23,7 +23,14 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, computed, reactive, provide } from 'vue'
+import {
+  inject,
+  computed,
+  reactive,
+  provide,
+  onMounted,
+  onUnmounted
+} from 'vue'
 import { isNil } from 'lodash-es'
 import {
   type FormItemProps,
@@ -79,7 +86,7 @@ const validate = (trigger?: string) => {
       [modelName]: triggerRules
     })
     validateStatus.loading = true
-    validator
+    return validator
       .validate({ [modelName]: innerValue.value })
       .then(() => {
         validateStatus.state = 'success'
@@ -90,6 +97,7 @@ const validate = (trigger?: string) => {
         validateStatus.errorMsg =
           errors && errors.length ? errors[0].message || '' : ''
         console.log(e.errors)
+        return Promise.reject(e)
       })
       .finally(() => {
         validateStatus.loading = false
@@ -97,9 +105,20 @@ const validate = (trigger?: string) => {
   }
 }
 const context: FormItemContext = {
-  validate
+  validate,
+  prop: props.prop || ''
 }
 provide(formItemContextKey, context)
+
+onMounted(() => {
+  if (props.prop) {
+    formContext?.addField(context)
+  }
+})
+
+onUnmounted(() => {
+  formContext?.removeField(context)
+})
 </script>
 
 <style></style>
