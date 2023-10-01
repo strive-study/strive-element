@@ -25,16 +25,17 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: 'Github', link: 'https://github.com/strive-study/strive-element' },
+      {
+        text: 'Github',
+        link: 'https://github.com/strive-study/strive-element'
+      },
       { text: '个人主页', link: 'https://github.com/18845778092' }
     ],
 
     sidebar: [
       {
         text: '基础',
-        items: [
-          { text: '快速开始', link: '/quick-start' },
-        ]
+        items: [{ text: '快速开始', link: '/quick-start' }]
       },
       {
         text: '组件',
@@ -42,7 +43,8 @@ export default defineConfig({
           { text: 'Button', link: '/components/button' },
           { text: 'Input', link: '/components/input' },
           { text: 'Switch', link: '/components/switch' },
-          { text: 'Select', link: '/components/select' }
+          { text: 'Select', link: '/components/select' },
+          { text: 'Form', link: '/components/form' }
         ]
       }
     ],
