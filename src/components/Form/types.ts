@@ -15,7 +15,7 @@ export interface FormItemRule extends RuleItem {
 export type FormRules = Record<string, FormItemRule[]>
 
 export interface FormProps {
-  model: FormRules
+  model: Record<string, any>
   rules: FormRules
 }
 
@@ -32,6 +32,8 @@ export interface FormValidateFailure {
 export interface FormItemContext {
   validate: (trigger?: string) => any
   prop: string
+  resetField(): void
+  clearValidate(): void
 }
 
 export const formContextKey: InjectionKey<FormContext> =
@@ -41,4 +43,6 @@ export const formItemContextKey: InjectionKey<FormItemContext> =
 
 export interface FormInstance {
   validate: () => Promise<any>
+  resetFields: (props?: string[]) => void
+  clearValidate: (props?: string[]) => void
 }
