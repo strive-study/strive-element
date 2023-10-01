@@ -11,7 +11,7 @@
       <slot name="label" :label="label">{{ label }}</slot>
     </label>
     <div class="st-form-item__content">
-      <slot />
+      <slot :validate="validate" />
       <div
         class="st-form-item__error-msg"
         v-if="validateStatus.state === 'error'"
@@ -19,17 +19,18 @@
         {{ validateStatus.errorMsg }}
       </div>
     </div>
-    <button @click.prevent="validate">Validate</button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { inject, computed, reactive } from 'vue'
+import { inject, computed, reactive, provide } from 'vue'
 import { isNil } from 'lodash-es'
 import {
   type FormItemProps,
+  type FormValidateFailure,
+  type FormItemContext,
   formContextKey,
-  FormValidateFailure
+  formItemContextKey
 } from './types'
 import Schema from 'async-validator'
 defineOptions({
@@ -58,11 +59,24 @@ const itemRules = computed(() => {
     return []
   }
 })
-const validate = () => {
+const getTriggerRules = (trigger?: string) => {
+  const rules = itemRules.value
+  if (rules) {
+    return rules.filter(rule => {
+      if (!rule.trigger || !trigger) return true
+      return rule.trigger === trigger
+    })
+  } else {
+    return []
+  }
+}
+const validate = (trigger?: string) => {
   const modelName = props.prop
+  const triggerRules = getTriggerRules(trigger)
+  if (!triggerRules.length) return true
   if (modelName) {
     const validator = new Schema({
-      [modelName]: itemRules.value
+      [modelName]: triggerRules
     })
     validateStatus.loading = true
     validator
@@ -82,6 +96,10 @@ const validate = () => {
       })
   }
 }
+const context: FormItemContext = {
+  validate
+}
+provide(formItemContextKey, context)
 </script>
 
 <style></style>

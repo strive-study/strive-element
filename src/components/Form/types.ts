@@ -9,8 +9,10 @@ export interface FormItemProps {
   label?: string
   prop?: string
 }
-
-export type FormRules = Record<string, RuleItem[]>
+export interface FormItemRule extends RuleItem {
+  trigger?: string
+}
+export type FormRules = Record<string, FormItemRule[]>
 
 export interface FormProps {
   model: FormRules
@@ -24,5 +26,11 @@ export interface FormValidateFailure {
   fields: ValidateFieldsError
 }
 
+export interface FormItemContext {
+  validate: (trigger?: string) => any
+}
+
 export const formContextKey: InjectionKey<FormContext> =
   Symbol('formContextKey')
+export const formItemContextKey: InjectionKey<FormItemContext> =
+  Symbol('formItemContextKey')
