@@ -14,7 +14,7 @@ export type CustomFilterRemoteFunc = (value: string) => SelectOption[]
 export interface SelectProps {
   modelValue: string
   options?: SelectOption[]
-  placeholder: string
+  placeholder?: string
   disabled?: boolean
   clearable?: boolean
   renderLabel?: RenderLabelFunc
