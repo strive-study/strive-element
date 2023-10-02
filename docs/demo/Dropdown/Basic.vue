@@ -19,8 +19,8 @@ const options = [
 </script>
 
 <style>
-.vitepress-demo-preview-preview ul,
-.vitepress-demo-preview-preview ol {
+.vp-doc .vitepress-demo-preview-preview ul,
+.vp-doc .vitepress-demo-preview-preview ol {
   list-style-type: none;
   margin: 0;
   padding: 0;
