@@ -29,9 +29,15 @@ export interface FormValidateFailure {
   fields: ValidateFieldsError
 }
 
+export interface ValidateStatusProp {
+  state: 'init' | 'success' | 'error' | 'loading'
+  errorMsg: string
+  loading: boolean
+}
+
 export interface FormItemContext {
-  validate: (trigger?: string) => any
   prop: string
+  validate: (trigger?: string) => Promise<any>
   resetField(): void
   clearValidate(): void
 }
@@ -45,4 +51,11 @@ export interface FormInstance {
   validate: () => Promise<any>
   resetFields: (props?: string[]) => void
   clearValidate: (props?: string[]) => void
+}
+
+export interface FormItemInstance {
+  validateStatus: ValidateStatusProp
+  validate: (trigger?: string) => Promise<any>
+  resetField(): void
+  clearValidate(): void
 }

@@ -124,7 +124,7 @@ const showPasswordArea = computed(
 )
 
 const runValidation = (trigger?: string) => {
-  formItemContext?.validate(trigger)
+  formItemContext?.validate(trigger).catch(e => console.log(e.errors))
 }
 
 const togglePasswordVisible = () => {

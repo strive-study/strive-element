@@ -37,6 +37,8 @@ import {
   type FormItemProps,
   type FormValidateFailure,
   type FormItemContext,
+  type ValidateStatusProp,
+  type FormItemInstance,
   formContextKey,
   formItemContextKey
 } from './types'
@@ -46,12 +48,13 @@ defineOptions({
 })
 const props = defineProps<FormItemProps>()
 const formContext = inject(formContextKey)
-const validateStatus = reactive({
+const validateStatus = reactive<ValidateStatusProp>({
   state: 'init',
   errorMsg: '',
   loading: false
 })
 let initialValue: any = null
+
 const isRequired = computed(() => {
   return itemRules.value.some(rule => rule.required)
 })
@@ -63,6 +66,7 @@ const innerValue = computed(() => {
     return null
   }
 })
+
 const itemRules = computed(() => {
   const rules = formContext?.rules
   if (rules && props.prop && rules[props.prop]) {
@@ -71,6 +75,7 @@ const itemRules = computed(() => {
     return []
   }
 })
+
 const getTriggerRules = (trigger?: string) => {
   const rules = itemRules.value
   if (rules) {
@@ -82,7 +87,8 @@ const getTriggerRules = (trigger?: string) => {
     return []
   }
 }
-const validate = (trigger?: string) => {
+
+const validate = async (trigger?: string) => {
   const modelName = props.prop
   const triggerRules = getTriggerRules(trigger)
   if (!triggerRules.length) return true
@@ -115,6 +121,7 @@ const clearValidate = () => {
   validateStatus.errorMsg = ''
   validateStatus.loading = false
 }
+
 const resetField = () => {
   clearValidate()
   const model = formContext?.model
@@ -122,12 +129,14 @@ const resetField = () => {
     model[props.prop] = initialValue
   }
 }
+
 const context: FormItemContext = {
   validate,
   prop: props.prop || '',
   clearValidate,
   resetField
 }
+
 provide(formItemContextKey, context)
 
 onMounted(() => {
@@ -139,6 +148,13 @@ onMounted(() => {
 
 onUnmounted(() => {
   formContext?.removeField(context)
+})
+
+defineExpose<FormItemInstance>({
+  validateStatus,
+  clearValidate,
+  resetField,
+  validate
 })
 </script>
 
