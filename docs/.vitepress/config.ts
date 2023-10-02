@@ -46,7 +46,8 @@ export default defineConfig({
           { text: 'Alert', link: '/components/alert' },
           { text: 'Switch', link: '/components/switch' },
           { text: 'Select', link: '/components/select' },
-          { text: 'Form', link: '/components/form' }
+          { text: 'Form', link: '/components/form' },
+          { text: 'Tooltip', link: '/components/tooltip' }
         ]
       }
     ],
