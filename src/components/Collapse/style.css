@@ -27,6 +27,9 @@
   transition: border-bottom-color var(--st-transition-duration);
   outline: none;
   border-bottom: 1px solid var(--st-collapse-border-color);
+  .header-angle {
+    font-size: 12px;
+  }
   &.is-disabled {
     color: var(--st-collapse-disabled-text-color);
     cursor: not-allowed;
