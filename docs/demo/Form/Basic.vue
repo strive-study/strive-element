@@ -5,9 +5,6 @@
         <Input v-model="model.email"></Input>
       </FormItem>
       <FormItem label="password" prop="password">
-        <template #label="{ label }">
-          <Button>{{ label }}</Button>
-        </template>
         <Input type="password" v-model="model.password"></Input>
       </FormItem>
       <div>

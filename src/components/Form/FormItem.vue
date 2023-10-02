@@ -4,7 +4,8 @@
     :class="{
       'is-error': validateStatus.state === 'error',
       'is-success': validateStatus.state === 'success',
-      'is-loading': validateStatus.state === 'loading'
+      'is-loading': validateStatus.state === 'loading',
+      'is-required': isRequired
     }"
   >
     <label for="" class="st-form-item__label">
@@ -51,6 +52,9 @@ const validateStatus = reactive({
   loading: false
 })
 let initialValue: any = null
+const isRequired = computed(() => {
+  return itemRules.value.some(rule => rule.required)
+})
 const innerValue = computed(() => {
   const model = formContext?.model
   if (model && props.prop && !isNil(model[props.prop])) {
