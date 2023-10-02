@@ -15,7 +15,7 @@ const test = ref(false)
   display: flex;
   align-items: center;
   gap: 20px;
-  .vk-switch {
+  .st-switch {
     margin-right: 10px;
   }
 }
