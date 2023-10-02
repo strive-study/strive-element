@@ -70,12 +70,12 @@
     <Icon icon="fa-solid fa-user-secret" size="2xl" type="primary" />
     <hr />
     <h1>Alert</h1>
-    <Alert closeable content="info" @close="onClose" ref="alertRef" />
-    <Alert closeable content="success" type="success" />
-    <Alert closeable content="warning" type="warning" />
-    <Alert closeable content="danger" type="danger" />
-    <Alert closeable content="dark primary" type="primary" effect="dark" />
-    <Alert closeable content="dark danger" type="danger" effect="dark" />
+    <Alert closable content="info" @close="onClose" ref="alertRef" />
+    <Alert closable content="success" type="success" />
+    <Alert closable content="warning" type="warning" />
+    <Alert closable content="danger" type="danger" />
+    <Alert closable content="dark primary" type="primary" effect="dark" />
+    <Alert closable content="dark danger" type="danger" effect="dark" />
     <hr />
   </main>
 </template>

@@ -3,47 +3,29 @@ title: Form | ST-Element | Mini-Element
 description: Form 组件的文档
 ---
 
-# Form 
+# Form 表单
 
-通过鼠标或键盘输入字符
+表单包含 `输入框`, `单选框`, `下拉选择`, `多选框` 等用户输入的组件。 
+使用表单，您可以收集、验证和提交数据。
 
-## 基础文本框
+## 典型表单
 
-<preview path="../demo/Form/Basic.vue" title="基础表单组件" description="Form 基础表单"></preview>
+最基础的表单包括各种输入表单项，比如input、select、radio、checkbox等。
 
-## 禁用文本框
+在每一个 form 组件中，你需要一个 form-item 字段作为输入项的容器，用于获取值与验证值。
 
-通过 **disabled** 属性指定是否禁用 input 组件
+<preview path="../demo/Form/Basic.vue" title="典型表单" description="Form 典型表单"></preview>
 
-<preview path="../demo/Input/Disable.vue" title="禁用文本框" description="Input 禁用文本框"></preview>
+## 表单校验
 
-## 尺寸
+Form 组件允许你验证用户的输入是否符合规范，来帮助你找到和纠正错误。
 
-使用 size 属性改变输入框大小。 除了默认大小外，还有另外两个选项： **large**, **small**。
+Form 组件提供了表单验证的功能，只需为 rules 属性传入约定的验证规则，并将 form-Item 的 prop 属性设置为需要验证的特殊键值即可。 更多高级用法可参考 async-validator。
 
-<preview path="../demo/Input/Size.vue" title="不同尺寸文本框" description="不同尺寸文本框"></preview>
+<preview path="../demo/Form/Validate.vue" title="表单校验" description="Form 表单校验"></preview>
 
-## 复合型输入框
+## 自定义校验规则
 
-可以在输入框前置或后置一个元素，通常是标签或按钮。可以使用 **prepend** 和 **append** 插槽。
-要在输入框中添加前后元素，可以使用 **prefix** 和 **suffix** 插槽。
+这个例子中展示了如何使用自定义验证规则来完成密码的二次验证。
 
-<preview path="../demo/Input/Combo.vue" title="复合型输入框" description="Input 复合型输入框"></preview>
-
-## Textarea
-
-用于输入多行文本信息可缩放的输入框。 添加 **type="textarea"** 属性来将 input 元素转换为原生的 textarea 元素。
-
-<preview path="../demo/Input/Textarea.vue" title="Textarea" description="Textarea"></preview>
-
-## 密码文本框
-
-使用 **show-password** 属性即可得到一个可切换显示隐藏的密码框
-
-<preview path="../demo/Input/Password.vue" title="密码文本框" description="Input 密码文本框"></preview>
-
-## 清空文本框
-
-使用 **clearable** 属性即可得到一个可一键清空的输入框
-
-<preview path="../demo/Input/Clear.vue" title="清空文本框" description="Input 清空文本框"></preview>
+<preview path="../demo/Form/Custom.vue" title="自定义校验规则" description="Form 自定义校验规则"></preview>
