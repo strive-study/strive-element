@@ -2,7 +2,7 @@ export interface AlertProps {
   content?: string
   type?: 'primary' | 'success' | 'warning' | 'danger' | 'info'
   effect?: 'light' | 'dark'
-  closeable: boolean
+  closable: boolean
 }
 
 export interface AlertEmits {

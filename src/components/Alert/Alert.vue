@@ -13,7 +13,7 @@
           <slot>{{ content }}</slot>
         </span>
       </div>
-      <div class="st-alert__close" v-if="closeable">
+      <div class="st-alert__close" v-if="closable">
         <Icon @click.stop="visible = false" icon="xmark" />
       </div>
     </div>
