@@ -71,7 +71,7 @@ description: Tooltip组件文档
 
 ### Exposes
 
-| Name | Description     | Type                                              |
-| ---- | --------------- | ------------------------------------------------- |
-| show | 手动打开Tooltip | ^[Function]`(event?: Event \| undefined) => void` |
-| hide | 手动关闭Tooltip | ^[Function]`(event?: Event \| undefined) => void` |
+| Name | Description     | Type                                   |
+| ---- | --------------- | -------------------------------------- |
+| show | 手动打开Tooltip | `(event?: Event \| undefined) => void` |
+| hide | 手动关闭Tooltip | `(event?: Event \| undefined) => void` |

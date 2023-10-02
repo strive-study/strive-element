@@ -36,9 +36,9 @@ description: Collapse 组件的文档
 
 ## Collapse Slots
 
-| Name | Description   | Subtags       |
-| ---- | ------------- | ------------- |
-| -    | 自定义content | Collapse Item |
+| Name | Description             | Subtags       |
+| ---- | ----------------------- | ------------- |
+| -    | 插入Collapse Item的插槽 | Collapse Item |
 
 ## Collapse Item Attributes
 
@@ -50,7 +50,7 @@ description: Collapse 组件的文档
 
 ## Collapse Item Slot
 
-| Name  | Description                    |
-| ----- | ------------------------------ |
-| —     | content of Collapse Item       |
-| title | content of Collapse Item title |
+| Name  | Description         |
+| ----- | ------------------- |
+| —     | Collapse Item内容   |
+| title | Collapse Item title |
