@@ -48,7 +48,8 @@ export default defineConfig({
           { text: 'Select', link: '/components/select' },
           { text: 'Form', link: '/components/form' },
           { text: 'Tooltip', link: '/components/tooltip' },
-          { text: 'Collapse', link: '/components/collapse' }
+          { text: 'Collapse', link: '/components/collapse' },
+          { text: 'Dropdown', link: '/components/dropdown' }
         ]
       }
     ],
