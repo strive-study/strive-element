@@ -137,6 +137,14 @@ watch(
     filteredOptions.value = newOptions
   }
 )
+watch(
+  () => props.modelValue,
+  newValue => {
+    const updateOption = findOption(newValue)
+    states.inputValue = updateOption ? updateOption.label : ''
+    states.selectedOption = updateOption
+  }
+)
 // 可过滤
 const generateFilterOptions = async (searchValue: string) => {
   if (!props.filterable) return

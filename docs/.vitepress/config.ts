@@ -9,6 +9,7 @@ import {
 export default defineConfig({
   title: 'St-Element | Mini Element',
   description: 'Mini Element组件库',
+  base: '/',
   vite: {
     resolve: {
       alias: {
