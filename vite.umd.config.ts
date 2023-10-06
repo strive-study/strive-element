@@ -1,40 +1,27 @@
 import { fileURLToPath, URL } from 'node:url'
-
+import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import eslint from 'vite-plugin-eslint'
-import { resolve } from 'path'
-import dts from 'vite-plugin-dts'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    eslint(),
-    dts({
-      tsconfigPath: './tsconfig.build.json'
-    })
-  ],
+  plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
   build: {
+    outDir: 'dist/umd',
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'StElement',
-      fileName: 'st-element'
+      fileName: 'st-element',
+      formats: ['umd']
     },
     rollupOptions: {
-      external: [
-        'vue',
-        '@fortawesome/fontawesome-svg-core',
-        '@fortawesome/free-solid-svg-icons',
-        '@fortawesome/vue-fontawesome'
-      ],
+      external: ['vue'],
       output: {
         exports: 'named',
         globals: {

@@ -9,7 +9,7 @@ import {
 export default defineConfig({
   title: 'St-Element | Mini Element',
   description: 'Mini Element组件库',
-  base: '/',
+  // base: process.env.NODE_ENV !== 'development' ? './' : undefined,
   vite: {
     resolve: {
       alias: {
